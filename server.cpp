@@ -85,6 +85,7 @@ int main(int argc, char *argv[]) {
   //-------------------
 
   close(fd);
+  
   write(clfd, "Hello!\r\n", 8);
 
   if ((rx_bytes = read(clfd, buffer, 1023)) < 0) {

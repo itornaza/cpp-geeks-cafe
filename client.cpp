@@ -82,6 +82,7 @@ int main(int argc, char *argv[]) {
   std::cout << "Received: " << buffer << std::endl;
   
   write(fd, "Thanks! Bye-bye...\r\n", 20);
+  
   close(fd);
 
   return 0;
