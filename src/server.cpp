@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
   int clfd;          // Client connection file descriptor
   int rx_bytes;      // Number of received bytes from the client
   char buffer[1024]; // Buffer to hold the received bytes from the client
+  int listener_queue_len = 1;
   struct sockaddr_in addr;
   struct sockaddr_in peeraddr;
   socklen_t peeraddr_len;
@@ -55,7 +56,7 @@ int main(int argc, char *argv[]) {
   setsockopt(fd, SOL_SOCKET, SO_LINGER, &linger_opt, sizeof(linger_opt));
 
   // Listen for a connection, 1 is the max length of the queue
-  if (listen(fd, 1) < 0) {
+  if (listen(fd, listener_queue_len) < 0) {
     std::cerr << "Error: " << strerror(errno) << std::endl;
     exit(1);
   }
@@ -84,7 +85,6 @@ int main(int argc, char *argv[]) {
   // Handle comms
   //-------------------
 
-  close(fd);
   write(clfd, "Hello!\r\n", 8);
 
   if ((rx_bytes = read(clfd, buffer, 1023)) < 0) {
@@ -94,13 +94,8 @@ int main(int argc, char *argv[]) {
   buffer[rx_bytes] = 0;
   std::cout << "Received " << rx_bytes << " bytes:" << std::endl << buffer;
 
-  // Control connection close
-  int terminate = 1;
-  while (terminate != -1) {
-    std::cout << "Enter -1 to terminate: ";
-    std::cin >> terminate;
-  }
   close(clfd);
+  close(fd);
 
   return 0;
 }

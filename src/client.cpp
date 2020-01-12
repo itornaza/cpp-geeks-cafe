@@ -8,6 +8,8 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include "order.h"
+
 int main(int argc, char *argv[]) {
   int fd; // Socket file descriptor
   char *host_name = "localhost";
@@ -59,12 +61,12 @@ int main(int argc, char *argv[]) {
   std::cout << "server address: " << (host->h_addr_list[0][0] & 0xff) << "."
             << (host->h_addr_list[0][1] & 0xff) << "."
             << (host->h_addr_list[0][2] & 0xff) << "."
-            << (host->h_addr_list[0][3] & 0xff) << ", port: "
-            << static_cast<int>(port) << std::endl;
+            << (host->h_addr_list[0][3] & 0xff)
+            << ", port: " << static_cast<int>(port) << std::endl;
 
   // Write resolved IP address of a server to the address structure
   memmove(&(server.sin_addr.s_addr), host->h_addr_list[0], 4);
-  
+
   if ((connect(fd, (struct sockaddr *)&server, sizeof(server))) < 0) {
     std::cerr << "Error: " << strerror(errno) << std::endl;
     exit(1);
@@ -80,7 +82,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
   std::cout << "Received: " << buffer << std::endl;
-  
+
   write(fd, "Thanks! Bye-bye...\r\n", 20);
   close(fd);
 
