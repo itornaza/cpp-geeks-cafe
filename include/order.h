@@ -10,13 +10,13 @@ class Order {
 public:
   // Constructor
   Order(int, int);
-  
+
   // Getters and setters
   void set_id(int);
   int get_id() const;
   int get_waiter_id() const;
   int get_table_id() const;
-  
+
   // Behavior
   void add(int, std::string, Menu *);
   void remove(int);

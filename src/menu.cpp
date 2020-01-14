@@ -16,20 +16,20 @@ Menu::Menu() {
   std::string tmp;
   int value;
 
-	fd.open(path);
+  fd.open(path);
   if (fd.fail()) {
     std::cerr << "Error: Cannot open data/catalog.txt" << std::endl;
     exit(1);
   }
 
   // For each line in the catalog
-  while(!fd.eof()) {
+  while (!fd.eof()) {
     std::string line;
     std::getline(fd, line);
-    std::istringstream stream(line);     
-    
+    std::istringstream stream(line);
+
     // Reset variables
-    tmp = ""; 
+    tmp = "";
     key = "";
 
     // Parse each line
@@ -57,7 +57,7 @@ Menu::Menu() {
     key = Menu::trim(key, ' ');
     catalog_.emplace(key, value);
   }
-	fd.close();
+  fd.close();
 }
 
 void Menu::manage_resource(std::string key) {
@@ -70,8 +70,8 @@ void Menu::manage_resource(std::string key) {
       if ((*it).second > 0) {
         --(*it).second;
       } // End inner if
-    } // End outer if
-  } // End for
+    }   // End outer if
+  }     // End for
   mtx_.unlock();
 }
 
@@ -81,8 +81,8 @@ bool Menu::is_available(std::string key) const {
       if ((*it).second != 0) {
         return true;
       } // End inner if
-    } // End outer if
-  } // End for
+    }   // End outer if
+  }     // End for
   return false;
 }
 
@@ -102,12 +102,12 @@ std::string Menu::key_from_num(int product) {
 int Menu::size() { return catalog_.size(); }
 
 void Menu::print() const {
-  std::cout << std::endl 
+  std::cout << std::endl
             << "****************************************" << std::endl
             << "*  Coffee shop menu (" << catalog_.size() << ") products"
             << std::endl
-            << "****************************************" << std::endl; 
-  
+            << "****************************************" << std::endl;
+
   int i = 1;
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     std::cout << "  " << i << ". " << (*it).first;
@@ -117,15 +117,15 @@ void Menu::print() const {
     ++i;
     std::cout << std::endl;
   }
-  std::cout << "****************************************" << std::endl; 
+  std::cout << "****************************************" << std::endl;
 }
 
 /**
  * trim
- * 
+ *
  * A helper method to discard leading and trailing whitespace from string
  */
-std::string Menu::trim(std::string& str, char delim) {
+std::string Menu::trim(std::string &str, char delim) {
   size_t first = str.find_first_not_of(delim);
   size_t last = str.find_last_not_of(delim);
   return str.substr(first, (last - first + 1));

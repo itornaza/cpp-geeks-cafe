@@ -7,17 +7,16 @@ Orders::Orders() { coffeshop_id_ = 0; }
 
 void Orders::add(Order order) { orders_.push_back(order); }
 
-void Orders::remove_next() {  
-  if (orders_.size() > 0) { 
+void Orders::remove_next() {
+  if (orders_.size() > 0) {
     orders_.pop_front();
-  } 
+  }
 }
 
-void Orders::remove(int order_id) {
+Order Orders::find(int order_id) {
   for (auto it = orders_.begin(); it != orders_.end(); ++it) {
     if (order_id == (*it).get_id()) {
-      orders_.erase(it);
-      return; // Otherwise the iterator does not exist anymore
+      return *it;
     }
   }
 }
@@ -33,9 +32,9 @@ void Orders::remove(Order order) {
 
 int Orders::size() const { return orders_.size(); }
 
-void Orders::print_next() const { 
-  if (orders_.size() > 0) { 
-    orders_.front().print(); 
+void Orders::print_next() const {
+  if (orders_.size() > 0) {
+    orders_.front().print();
   }
 }
 
