@@ -41,15 +41,15 @@ int Order::get_table_id() const { return table_id_; }
 void Order::add(int product, std::string comment, Menu *menu) {
   // Get the catalog key of the product
   std::string key = menu->key_from_num(product);
-  
+
   // Check if the product is available and try to get it!!!
   if (menu->is_available(key)) {
     products_.insert(std::pair<int, std::string>(product, comment));
     menu->manage_resource(key);
   } else {
-    std::cout << std::endl 
+    std::cerr << std::endl
               << "Sorry, " << key << " is out of stock" << std::endl;
-  } 
+  }
 }
 
 void Order::remove(int product) {
@@ -59,7 +59,7 @@ void Order::remove(int product) {
 void Order::clear() { products_.clear(); }
 
 void Order::print() const {
-  std::cout << "- Order " << id_ << " from waiter " << waiter_id_ 
+  std::cout << "- Order " << id_ << " from waiter " << waiter_id_
             << " at table " << table_id_ << std::endl;
   for (auto it = products_.begin(); it != products_.end(); ++it) {
     std::cout << "  " << (*it).first << " - " << (*it).second << std::endl;

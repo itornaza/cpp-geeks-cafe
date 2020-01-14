@@ -1,5 +1,5 @@
-#include <string>
 #include <iostream>
+#include <string>
 
 #include "cli.h"
 
@@ -14,6 +14,5 @@ int main(int argc, char *argv[]) {
   } else {
     cli::live();
   }
-
   return 0;
 }
