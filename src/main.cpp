@@ -6,8 +6,8 @@
 int main(int argc, char *argv[]) {
   if (argc > 1) {
     std::string s(argv[1]);
-    if (s == "-s") {
-      cli::simulation();
+    if (s == "-t") {
+      cli::test();
     } else if (s == "-h") {
       cli::usage();
     }
