@@ -99,6 +99,8 @@ std::string Menu::key_from_num(int product) {
   return (*it).first; // TODO: If a product is not found we return the last
 }
 
+int Menu::size() { return catalog_.size(); }
+
 void Menu::print() const {
   std::cout << std::endl 
             << "****************************************" << std::endl

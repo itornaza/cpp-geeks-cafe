@@ -14,8 +14,10 @@ public:
   // Behavior
   void add(Order);
   void remove_next();
+  void remove(int);
   void remove(Order);
   int size() const;
+  // TODO: Convert remove(int) to find(int) and add edit order functionality
   
   // Printing
   void print_next() const;
