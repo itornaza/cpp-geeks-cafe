@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <mutex>
 #include <sstream>
 
 #include "menu.h"
@@ -63,7 +64,7 @@ void Menu::manage_resource(std::string key) {
 
   // TODO: Protect operation with a mutex to avoid race conditions
   // TODO: Update catalog text file or not???
-  
+  mtx_.lock();
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     if ((*it).first == key) {
       if ((*it).second > 0) {
@@ -71,9 +72,10 @@ void Menu::manage_resource(std::string key) {
       } // End inner if
     } // End outer if
   } // End for
+  mtx_.unlock();
 }
 
-bool Menu::is_available(std::string key) {
+bool Menu::is_available(std::string key) const {
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     if ((*it).first == key) {
       if ((*it).second != 0) {
@@ -97,19 +99,23 @@ std::string Menu::key_from_num(int product) {
   return (*it).first; // TODO: If a product is not found we return the last
 }
 
-void Menu::print() {
-  std::cout << std::endl << "* Coffee shop menu (" << catalog_.size() 
-            << ") products" << std::endl;
+void Menu::print() const {
+  std::cout << std::endl 
+            << "****************************************" << std::endl
+            << "*  Coffee shop menu (" << catalog_.size() << ") products"
+            << std::endl
+            << "****************************************" << std::endl; 
   
   int i = 1;
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     std::cout << "  " << i << ". " << (*it).first;
-    if ((*it).second > 0) {
+    if ((*it).second >= 0) {
       std::cout << " * " << (*it).second;
     }
     ++i;
     std::cout << std::endl;
   }
+  std::cout << "****************************************" << std::endl; 
 }
 
 /**

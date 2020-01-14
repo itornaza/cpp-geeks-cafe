@@ -8,19 +8,22 @@
 
 class Orders {
 public:
+  // Constructor
   Orders();
 
+  // Behavior
   void add(Order);
   void remove_next();
   void remove(Order);
-  int size();
+  int size() const;
   
-  void print_next();
-  void print_all();
+  // Printing
+  void print_next() const;
+  void print_all() const;
 
 private:
   int coffeshop_id_; // Provision for future versions
-  std::deque<Order> orders_;
+  std::deque<Order> orders_; // FIFO to control the bartender workflow
 };
 
 #endif /* ORDERS_H */

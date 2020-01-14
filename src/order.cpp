@@ -10,7 +10,7 @@ Order::Order(int waiter_id, int table_id)
   Order::set_id(waiter_id);
 }
 
-int Order::get_id() { return id_; }
+int Order::get_id() const { return id_; }
 
 /**
  * set_id
@@ -34,14 +34,15 @@ void Order::set_id(int waiter_id) {
   id_ = waiter_id + seconds_since_midnight;
 }
 
-int Order::get_waiter_id() { return waiter_id_; }
+int Order::get_waiter_id() const { return waiter_id_; }
 
-int Order::get_table_id() { return table_id_; }
+int Order::get_table_id() const { return table_id_; }
 
 void Order::add(int product, std::string comment, Menu *menu) {
   // Get the catalog key of the product
   std::string key = menu->key_from_num(product);
   
+  // Check if the product is available and try to get it!!!
   if (menu->is_available(key)) {
     products_.insert(std::pair<int, std::string>(product, comment));
     menu->manage_resource(key);
@@ -57,7 +58,7 @@ void Order::remove(int product) {
 
 void Order::clear() { products_.clear(); }
 
-void Order::print() {
+void Order::print() const {
   std::cout << "- Order " << id_ << " from waiter " << waiter_id_ 
             << " at table " << table_id_ << std::endl;
   for (auto it = products_.begin(); it != products_.end(); ++it) {

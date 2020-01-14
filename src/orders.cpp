@@ -18,13 +18,13 @@ void Orders::remove(Order order) {
   }
 }
 
-void Orders::print_next() { orders_.front().print(); }
+int Orders::size() const { return orders_.size(); }
 
-void Orders::print_all() {
+void Orders::print_next() const { orders_.front().print(); }
+
+void Orders::print_all() const {
   std::cout << std::endl << "+ Pending orders: " << Orders::size() << std::endl;
   for (auto it = orders_.begin(); it != orders_.end(); ++it) {
     (*it).print();
   }
 }
-
-int Orders::size() { return orders_.size(); }
