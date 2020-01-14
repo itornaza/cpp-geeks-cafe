@@ -1,21 +1,26 @@
 #ifndef ORDERS_H
 #define ORDERS_H
 
-#include <queue>
+#include <deque>
 #include <string>
-#include <map>
 
 #include "order.h"
 
 class Orders {
 public:
   Orders();
-  void add_order(Order);
-  void remove_order();
+
+  void add(Order);
+  void remove_next();
+  void remove(Order);
+  int size();
+  
+  void print_next();
+  void print_all();
 
 private:
-  int coffeshop_id_;
-  std::priority_queue<Order> orders_;
+  int coffeshop_id_; // Provision for future versions
+  std::deque<Order> orders_;
 };
 
 #endif /* ORDERS_H */
