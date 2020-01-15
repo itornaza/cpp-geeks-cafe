@@ -1,5 +1,6 @@
 #include <chrono>
 #include <iostream>
+#include <stdexcept>
 #include <thread>
 
 #include "cli.h"
@@ -127,11 +128,11 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
     case 6: { // Print order
       cli::cls();
       order.print();
-    }
-    case -1:
-      break; // Need an escape route!!!
-    default:
       break;
+    }
+    default: { // Need an escape route!!!
+      break;
+    }
     } // End switch
   }   // End while
 }
@@ -167,8 +168,12 @@ void cli::bartender_handler(Menu *menu, Orders *orders) {
       orders->print_all();
       std::cout << "Enter order id to remove: ";
       std::cin >> order_id;
-      Order order_to_remove = orders->find(order_id);
-      orders->remove(order_to_remove);
+      try {
+        Order order_to_remove = orders->find(order_id);
+        orders->remove(order_to_remove);
+      } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+      }
       break;
     }
     case 3: { // Print next order
@@ -179,10 +184,9 @@ void cli::bartender_handler(Menu *menu, Orders *orders) {
       orders->print_all();
       break;
     }
-    case -1:
-      break; // Need an escape route!!!
-    default:
+    default: { // Need an escape route!!!
       break;
+    }
     } // End switch
   }   // End while
 }
