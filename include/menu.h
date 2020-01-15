@@ -14,7 +14,7 @@ public:
   void manage_resource(std::string);
   bool is_available(std::string) const;
   std::string key_from_num(int);
-  int size();
+  int size() const;
 
   // Printing
   void print() const;

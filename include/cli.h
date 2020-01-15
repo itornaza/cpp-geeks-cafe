@@ -6,7 +6,6 @@
 
 namespace cli {
 void usage();
-void test();
 void live();
 void main_menu();
 void waiter_menu();
@@ -16,6 +15,8 @@ void bartender_handler(Menu *, Orders *);
 int get_selection(int);
 int get_selection_with_exit(int);
 void cls();
+
+void test();
 } // namespace cli
 
 #endif /* CLI_H */

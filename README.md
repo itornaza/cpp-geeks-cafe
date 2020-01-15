@@ -26,6 +26,8 @@ The backbone of the program is consisted of three classes, namely `class Menu`, 
 
 The command line interface is implemented in a separate file named `cli.cpp` so it can be easily replaced by a more advanced gui. The respective functions are packed together in `namespace cli` for code clarity.
 
+There are some tests implemented in `test.cpp` which can be launched with the `-t` option.
+
 ## Dependencies for Running Locally
 * cmake >= 3.11
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
