@@ -43,5 +43,6 @@ The command line interface is implemented in a separate file named `cli.cpp` so 
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./server`.
-5. Open another console in the `/build` directory and run: `./client`.
+4. Run it: `./coffee`
+5. Usage: `./coffee -h`
+6. Tests: `./coffee -t`

@@ -13,8 +13,8 @@ public:
 
   // Behavior
   void add(Order);
+  Order find(int);  // throws runtime exception
   void remove_next();
-  Order find(int);
   void remove(Order);
   int size() const;
 
