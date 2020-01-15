@@ -5,18 +5,17 @@
 #include "orders.h"
 
 namespace cli {
-void usage();
-void live();
 void main_menu();
 void waiter_menu();
-void waiter_handler(Menu *, Orders *);
-void bartender_menu();
-void bartender_handler(Menu *, Orders *);
+void validate_cin();
 int get_selection(int);
 int get_selection_with_exit(int);
+void bartender_menu();
+void waiter_handler(Menu *, Orders *);
+void bartender_handler(Menu *, Orders *);
+void usage();
+void live();
 void cls();
-
-void test();
 } // namespace cli
 
 #endif /* CLI_H */

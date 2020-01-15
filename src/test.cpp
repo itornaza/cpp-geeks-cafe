@@ -1,12 +1,12 @@
 #include <iostream>
 #include <thread>
 
-#include "cli.h"
+#include "test.h"
 #include "menu.h"
 #include "order.h"
 #include "orders.h"
 
-void cli::test() {
+void tst::test() {
 
   // TODO: Test more cases
 

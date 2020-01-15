@@ -53,15 +53,22 @@ void cli::bartender_menu() {
             << "********************************************" << std::endl;
 }
 
-// TODO: Check for invalid type of input on cin in the two functions below:
+void cli::validate_cin() {
+  if (std::cin.fail()) {
+    std::cin.clear();
+    std::cin.ignore(256, '\n');
+  }
+}
 
 int cli::get_selection_with_exit(int max) {
   int selection = 0;
   std::cout << "Enter selection from 1 to " << max << " (-1 to exit): ";
   std::cin >> selection;
+
   while (selection < -1 || selection == 0 || selection > max) {
-    std::cout << "Invalid input, please enter a selection between 1 and " << max
-              << ": ";
+    validate_cin();
+    std::cout << "Invalid input!" << std::endl
+              << "Please enter a selection between 1 and " << max << ": ";
     std::cin >> selection;
   } // End while
   cls();
@@ -72,9 +79,11 @@ int cli::get_selection(int max) {
   int selection = 0;
   std::cout << "Enter selection from 1 to " << max << ": ";
   std::cin >> selection;
+
   while (selection <= 0 || selection > max) {
-    std::cout << "Invalid input, please enter a selection between 1 and " << max
-              << ": ";
+    validate_cin();
+    std::cout << "Invalid input!" << std::endl 
+              << "Please enter a selection between 1 and " << max << ": ";
     std::cin >> selection;
   } // End while
   cls();
@@ -106,7 +115,7 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
       menu->print();
       int product = get_selection(menu->size());
       std::cin.clear(); // Clean up cin to avoid issues with getline
-      std::cin.ignore();
+      std::cin.ignore(256, '\n');
       std::cout << "Enter comment: ";
       getline(std::cin, comment);
       order.add(product, comment, menu);
