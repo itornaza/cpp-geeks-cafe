@@ -1,7 +1,6 @@
 #include <chrono>
 #include <iostream>
 #include <stdexcept>
-#include <thread>
 
 #include "cli.h"
 #include "menu.h"
@@ -18,178 +17,43 @@ void cli::usage() {
             << std::endl;
 }
 
-void cli::test() {
-  std::cout << std::endl << "*  Coffee shop simulation" << std::endl;
-  Menu menu;
-  menu.print();
-
-  // Order
-  Order order(1, 10);
-  order.add(2, "no sugar", &menu);
-  order.add(2, "with a lot of sugar", &menu);
-  order.add(2, "with little sugar", &menu);
-  order.add(3, "one brown suggar", &menu);
-  order.add(1, "flat", &menu);
-
-  std::this_thread::sleep_for(std::chrono::seconds(2));
-  Order order_2(2, 12);
-  order_2.add(1, "flat", &menu);
-
-  // Orders
-  Orders orders;
-  orders.add(order);
-  orders.add(order_2);
-  orders.print_all();
-  orders.remove(order_2);
-  orders.print_all();
-
-  menu.print();
-}
-
 void cli::main_menu() {
-  cli::cls();
+  cls();
   std::cout << std::endl
-            << "****************************************" << std::endl
+            << "********************************************" << std::endl
             << "*  Main Menu" << std::endl
-            << "****************************************" << std::endl
+            << "********************************************" << std::endl
             << "1. Waiter" << std::endl
             << "2. Bartender" << std::endl
-            << "****************************************" << std::endl;
+            << "********************************************" << std::endl;
 }
 
 void cli::waiter_menu() {
   std::cout << std::endl
-            << "****************************************" << std::endl
+            << "********************************************" << std::endl
             << "*  Waiter Menu" << std::endl
-            << "****************************************" << std::endl
+            << "********************************************" << std::endl
             << "1. Add product to order" << std::endl
             << "2. Remove product from order" << std::endl
             << "3. Clear all products from order" << std::endl
             << "4. Print order" << std::endl
             << "5. Add order to queue" << std::endl
-            << "****************************************" << std::endl;
-}
-
-void cli::waiter_handler(Menu *menu, Orders *orders) {
-  int selection = 0;
-  int waiter = 0;
-  int table = 0;
-
-  // Get details from the waiter
-  std::cout << std::endl << "Waiter details: " << std::endl;
-  std::cout << "Enter waiter number (1-3): ";
-  waiter = get_selection(3);
-  std::cout << "Enter table number (1-20): ";
-  table = get_selection(20);
-
-  // Initialize an order
-  Order order(waiter, table);
-
-  while (selection != -1) {
-    waiter_menu();
-    selection = get_selection_with_exit(5);
-
-    switch (selection) {
-    case 1: { // Add product
-      cli::cls();
-      menu->print();
-      int product = get_selection(menu->size());
-      std::cin.clear();
-      std::cin.ignore();
-      std::string comment;
-      std::cout << "Enter comment: ";
-      getline(std::cin, comment);
-      order.add(product, comment, menu);
-      order.print();
-      break;
-    }
-    case 2: { // Remove product
-      cli::cls();
-      order.print();
-      int product = get_selection(menu->size());
-      order.remove(product);
-      break;
-    }
-    case 3: { // Clear all products
-      cli::cls();
-      order.clear();
-      break;
-    }
-    case 4: { // Print order
-      cli::cls();
-      order.print();
-      break;
-    }
-    case 5: { // Add order
-      cli::cls();
-      orders->add(order);
-      break;
-    }
-    case 6: { // Print order
-      cli::cls();
-      order.print();
-      break;
-    }
-    default: { // Need an escape route!!!
-      break;
-    }
-    } // End switch
-  }   // End while
+            << "********************************************" << std::endl;
 }
 
 void cli::bartender_menu() {
   std::cout << std::endl
-            << "****************************************" << std::endl
+            << "********************************************" << std::endl
             << "*  Bartender menu" << std::endl
-            << "****************************************" << std::endl
+            << "********************************************" << std::endl
             << "1. Remove next order" << std::endl
             << "2. Remove an order" << std::endl
             << "3. Print next order" << std::endl
             << "4. Print all orders" << std::endl
-            << "****************************************" << std::endl;
+            << "********************************************" << std::endl;
 }
 
-void cli::bartender_handler(Menu *menu, Orders *orders) {
-  int selection = 0;
-  
-  while (selection != -1) {
-    bartender_menu();
-    selection = get_selection_with_exit(4);
-
-    switch (selection) {
-    case 1: { // Remove next order
-      if (orders->size() > 0) {
-        orders->remove_next();
-      }
-      break;
-    }
-    case 2: { // Remove an order
-      int order_id;
-      orders->print_all();
-      std::cout << "Enter order id to remove: ";
-      std::cin >> order_id;
-      try {
-        Order order_to_remove = orders->find(order_id);
-        orders->remove(order_to_remove);
-      } catch (const std::exception& e) {
-        std::cout << e.what() << std::endl;
-      }
-      break;
-    }
-    case 3: { // Print next order
-      orders->print_next();
-      break;
-    }
-    case 4: { // Print all orders
-      orders->print_all();
-      break;
-    }
-    default: { // Need an escape route!!!
-      break;
-    }
-    } // End switch
-  }   // End while
-}
+// TODO: Check for invalid type of input on cin in the two functions below:
 
 int cli::get_selection_with_exit(int max) {
   int selection = 0;
@@ -199,7 +63,8 @@ int cli::get_selection_with_exit(int max) {
     std::cout << "Invalid input, please enter a selection between 1 and " << max
               << ": ";
     std::cin >> selection;
-  }
+  } // End while
+  cls();
   return selection;
 }
 
@@ -211,8 +76,119 @@ int cli::get_selection(int max) {
     std::cout << "Invalid input, please enter a selection between 1 and " << max
               << ": ";
     std::cin >> selection;
-  }
+  } // End while
+  cls();
   return selection;
+}
+
+void cli::waiter_handler(Menu *menu, Orders *orders) {
+  int selection = 0;
+  int waiter = 0;
+  int table = 0;
+  Order order(waiter, table);
+
+  std::cout << std::endl
+            << "--------------" << std::endl
+            << "Waiter details" << std::endl
+            << "--------------" << std::endl;
+  std::cout << "Waiter number > ";
+  waiter = get_selection(3);
+  std::cout << "Table number > ";
+  table = get_selection(20);
+
+  while (selection != -1) {
+    waiter_menu();
+    selection = get_selection_with_exit(5);
+
+    switch (selection) {
+    case 1: { // Add product from the order
+      std::string comment;
+      menu->print();
+      int product = get_selection(menu->size());
+      std::cin.clear(); // Clean up cin to avoid issues with getline
+      std::cin.ignore();
+      std::cout << "Enter comment: ";
+      getline(std::cin, comment);
+      order.add(product, comment, menu);
+      order.print();
+      break;
+    }
+    case 2: { // Remove product from the order
+      order.print();
+      int product = get_selection(menu->size());
+      order.remove(product);
+      break;
+    }
+    case 3: { // Clear all products from the order
+      order.clear();
+      break;
+    }
+    case 4: { // Print order
+      order.print();
+      break;
+    }
+    case 5: { // Add order to the orders queue
+      // When the order is added to the orders queue, we are closing this order
+      // and return to the main menu.
+      orders->add(order);
+      selection = -1;
+      break;
+    }
+    default: { // Need an escape route!!!
+      selection = -1;
+      break;
+    } // End default
+    } // End switch
+  }   // End while
+}
+
+void cli::bartender_handler(Menu *menu, Orders *orders) {
+  int selection = 0;
+
+  while (selection != -1) {
+    bartender_menu();
+    selection = get_selection_with_exit(4);
+
+    switch (selection) {
+    case 1: { // Remove next order from the orders queue
+      if (orders->size() > 0) {
+        orders->remove_next();
+      } else {
+        std::cout << std::endl << "+ All orders are processed." << std::endl;
+      } // End if
+      break;
+    }
+    case 2: { // Remove an order from the orders queue
+      if (orders->size() > 0) {
+        int order_id;
+        orders->print_all();
+        std::cout << "Enter order id to remove: ";
+        std::cin >> order_id;
+        try {
+          Order order_to_remove = orders->find(order_id);
+          orders->remove(order_to_remove);
+        } catch (const std::exception &e) {
+          std::cout << e.what() << std::endl;
+        } // End try/catch
+      } else {
+        std::cout << std::endl << "+ All orders are processed." << std::endl;
+      } // End if
+      break;
+    }
+    case 3: { // Print next order in the orders queue
+      orders->print_next();
+      break;
+    }
+    case 4: { // Print all orders in the orders queue
+      orders->print_all();
+      break;
+    }
+    default: { // Need an escape route!!!
+      selection = -1;
+      break;
+    } // End default
+    } // End switch
+  }   // End while
 }
 
 void cli::live() {
@@ -229,11 +205,16 @@ void cli::live() {
       bartender_handler(&menu, &orders);
     } else {
       selection = -1;
-    }
-  }
+    } // End if
+  }   // End while
 }
 
-// https://stackoverflow.com/questions/17335816/clear-screen-using-c
+/**
+ * cls
+ *
+ * Clears the screen for clarity of the menu system. Interesting approach!!!
+ * found at: https://stackoverflow.com/questions/17335816/clear-screen-using-c
+ */
 void cli::cls() {
-  std::cout << "\033[2J\033[1;1H"; // Clears the screen
+  std::cout << "\033[2J\033[1;1H";
 }

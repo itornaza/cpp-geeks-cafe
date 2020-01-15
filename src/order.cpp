@@ -48,7 +48,7 @@ void Order::add(int product, std::string comment, Menu *menu) {
     menu->manage_resource(key);
   } else {
     std::cerr << std::endl
-              << "Sorry, " << key << " is out of stock" << std::endl;
+              << "-- Sorry, " << key << " is out of stock" << std::endl;
   }
 }
 
@@ -58,11 +58,20 @@ void Order::remove(int product) {
 
 void Order::clear() { products_.clear(); }
 
+int Order::size() const { return products_.size(); }
+
 void Order::print() const {
-  std::cout << "- Order " << id_ << " from waiter " << waiter_id_
+  std::cout << std::endl
+            << ">>>" << std::endl
+            << "- Order " << id_ << " from waiter " << waiter_id_
             << " at table " << table_id_ << std::endl;
-  for (auto it = products_.begin(); it != products_.end(); ++it) {
-    std::cout << "  " << (*it).first << " - " << (*it).second << std::endl;
+
+  if (size() > 0) {
+    for (auto it = products_.begin(); it != products_.end(); ++it) {
+      std::cout << "-- " << (*it).first << " - " << (*it).second << std::endl;
+    }
+  } else {
+    std::cout << "-- The order is still empty" << std::endl;
   }
 }
 

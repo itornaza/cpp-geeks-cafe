@@ -21,6 +21,7 @@ public:
   void add(int, std::string, Menu *);
   void remove(int);
   void clear();
+  int size() const;
   bool operator==(Order);
 
   // Printing

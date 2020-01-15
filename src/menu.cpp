@@ -99,15 +99,14 @@ std::string Menu::key_from_num(int product) {
   return (*it).first; // TODO: If a product is not found we return the last
 }
 
-int Menu::size() { return catalog_.size(); }
+int Menu::size() const { return catalog_.size(); }
 
 void Menu::print() const {
   std::cout << std::endl
-            << "****************************************" << std::endl
-            << "*  Coffee shop menu (" << catalog_.size() << ") products"
+            << "********************************************" << std::endl
+            << "*  Coffee shop menu (" << size() << ") products"
             << std::endl
-            << "****************************************" << std::endl;
-
+            << "********************************************" << std::endl;
   int i = 1;
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     std::cout << "  " << i << ". " << (*it).first;
@@ -117,7 +116,7 @@ void Menu::print() const {
     ++i;
     std::cout << std::endl;
   }
-  std::cout << "****************************************" << std::endl;
+  std::cout << "********************************************" << std::endl;
 }
 
 /**
