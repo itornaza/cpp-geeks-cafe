@@ -46,7 +46,7 @@ bool Order::add(int product, std::string comment, Menu *menu) noexcept {
     menu->manage_resource(key);
     products_.insert(std::pair<int, std::string>(product, comment));
     is_added = true;
-  }
+  } // End if
   return is_added;
 }
 
@@ -70,8 +70,8 @@ void Order::remove(int product, std::string comment) noexcept {
     if (q->second == comment) {
       products_.erase(q);
       break;
-    }
-  }
+    } // End if
+  } // End for
 }
 
 void Order::clear() noexcept { products_.clear(); }
@@ -86,20 +86,24 @@ int Order::size() const noexcept { return products_.size(); }
 bool Order::empty() const noexcept { return products_.empty(); }
 
 void Order::print() const noexcept {
-  std::cout << std::endl
-            << ">>>" << std::endl
-            << "- Order " << id_ << " from waiter " << waiter_id_
-            << " at table " << table_id_ 
-            << " (contains " << size() << " products)" << std::endl;
+  std::cout << std::endl << ">>>" << std::endl
+    << "- Order " << id_ << " from waiter " << waiter_id_
+    << " at table " << table_id_ << " (contains " << size() << " products)" 
+    << std::endl;
 
   if (!empty()) {
     for (auto it = products_.begin(); it != products_.end(); ++it) {
       std::cout << "-- " << (*it).first << " - " << (*it).second << std::endl;
-    }
+    } // End for
   } else {
     std::cout << "-- The order is still empty." << std::endl 
-              << "-- You may want to ask the customers for their orders!" << std::endl;
-  }
+      << "-- You may want to ask the customers for their orders!" << std::endl;
+  } // End if
 }
 
+/**
+ * ==
+ * 
+ * Consider the orders equal if they have the same id
+ */
 bool Order::operator==(Order order) noexcept { return (id_ == order.id_); }

@@ -66,7 +66,7 @@ Following the same style, tests are implemented in `test.cpp` and can be launche
 2. The project reads data from a file and process the data, or the program writes data to a file.
     * In the file `/src/menu.cpp`, the constructor of the `class Menu` at line TODO accepts a filename as an argument and uses it to access the file located at `/data/catalog.txt` to initialize the `catalog_` private member of the class.
 3. The project accepts user input and processes the input.
-    * In the `src/cli.cpp` file there are 4 functions that accept, validate and handle user input. Namely: validate_cin(), get_selection_with_exit() get_selection() and get_comment().
+    * In the `src/cli.cpp` file there are 4 functions that accept, validate and handle user input. Namely: get_selection_with_exit() get_selection(), get_int() and get_comment().
 
 ### Object Oriented Progeamming
 1. The project uses Object Oriented Programming techniques.
