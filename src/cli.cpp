@@ -92,7 +92,7 @@ int cli::get_selection(int max) {
   return selection;
 }
 
-std::string get_comment() {
+std::string cli::get_comment() {
   std::string comment;
   std::cin.clear(); // Clean up cin to avoid issues with getline
   std::cin.ignore(256, '\n');
