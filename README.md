@@ -18,9 +18,6 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 
 ## Code structure
 
-* `CMakeFileLists.txt`
-* `README.md`
-* `/data` contains the catalog in text format
 * `/include` contains all the respective header files.
 * `/src` contains all the cpp files.
 
@@ -29,22 +26,22 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 ├── CMakeLists.txt
 ├── README.md
 ├── data
-│   └── catalog.txt
+│   └── catalog.txt // The menu catalog in text format, can be set up by the manager
 ├── include
-│   ├── cli.h
-│   ├── menu.h
-│   ├── order.h
-│   ├── orders.h
-│   └── test.h
+│   ├── cli.h       // namespace cli
+│   ├── menu.h      // class Menu
+│   ├── order.h     // class Order
+│   ├── orders.h    // class Orders
+│   └── test.h      // namespace tst
 └── src
-    ├── cli.cpp
-    ├── client.cpp
-    ├── main.cpp
-    ├── menu.cpp
-    ├── order.cpp
-    ├── orders.cpp
-    ├── server.cpp
-    └── test.cpp
+    ├── cli.cpp     // Command line interface implementation
+    ├── client.cpp  // Future provision
+    ├── main.cpp    // Command line options
+    ├── menu.cpp    // class Menu
+    ├── order.cpp   // class Order
+    ├── orders.cpp  // class Orders
+    ├── server.cpp  // Future provision
+    └── test.cpp    // Tests implementation
 ```
 
 ## Implementation notes
