@@ -62,6 +62,8 @@ The command line interface is implemented in a separate file named `cli.cpp` so 
 
 Following the same style, tests are implemented in `test.cpp` and can be launched with the `-t` option, as described below in the 'Basic build instructions' section.
 
+There are two files in the `src` directory, `server.cpp` and `client.cpp` that are not part of the program at this first version. Please disregard them as they will be part of a future version that will be used on UNIX systems only.
+
 ## Rubric points addressed
 
 ### Loops, Funtions, I/O
