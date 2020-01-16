@@ -1,4 +1,5 @@
 #include <iostream>
+#include <assert.h> // TODO
 #include <thread>
 
 #include "test.h"
@@ -6,11 +7,12 @@
 #include "order.h"
 #include "orders.h"
 
+// TODO: Unit tests v assert
+// TODO: Test more cases
+
 void tst::test() {
 
-  // TODO: Test more cases
-
-  std::cout << std::endl << "*  Coffee shop simulation" << std::endl;
+  std::cout << std::endl << "*  Coffee shop tests" << std::endl;
   Menu menu;
   menu.print();
 
