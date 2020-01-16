@@ -24,26 +24,25 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 * `/include` contains all the respective header files.
 * `/src` contains all the cpp files.
 
-.
-├── CMakeLists.txt   
-├── README.md   
-├── data   
-│   └── catalog.txt   
-├── include   
-│   ├── cli.h   
-│   ├── menu.h   
-│   ├── order.h   
-│   ├── orders.h   
-│   └── test.h   
-└── src   
-    ├── cli.cpp   
-    ├── client.cpp   
-    ├── main.cpp   
-    ├── menu.cpp   
-    ├── order.cpp   
-    ├── orders.cpp   
-    ├── server.cpp   
-    └── test.cpp   
+CMakeLists.txt   
+README.md   
+data   
+    catalog.txt   
+include   
+    cli.h   
+    menu.h   
+    order.h   
+    orders.h   
+    test.h   
+src   
+    cli.cpp   
+    client.cpp   
+    main.cpp   
+    menu.cpp   
+    order.cpp   
+    orders.cpp   
+    server.cpp   
+    test.cpp   
 
 ## Implementation notes
 
