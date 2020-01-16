@@ -66,19 +66,19 @@ Following the same style, tests are implemented in `test.cpp` and can be launche
 
 ### Loops, Funtions, I/O
 1. The project demonstrates an understanding of C++ functions and control structures.
-    * In the file `/src/cli.cpp`, the `waiter_handler()` function at lines TODO demonstrates if, while and switch control structures. In addition, this file organises functions under the namespace `cli`.
+    * In the file `/src/cli.cpp`, the `waiter_handler()` function at lines 130 through 213 demonstrates the if, while and switch control structures. In addition, this file organises functions under the namespace `cli`.
 2. The project reads data from a file and process the data, or the program writes data to a file.
-    * In the file `/src/menu.cpp`, the constructor of the `class Menu` at line TODO accepts a filename as an argument and uses it to access the file located at `/data/catalog.txt` to initialize the `catalog_` private member of the class.
+    * In the file `/src/menu.cpp`, the constructor of the `class Menu` from line 9 to 59 accepts a filename as an argument and uses it to access the file located at `/data/catalog.txt` to initialize the `catalog_` private member of its class.
 3. The project accepts user input and processes the input.
-    * In the `src/cli.cpp` file there are 4 functions that accept, validate and handle user input. Namely: get_selection_with_exit() get_selection(), get_int() and get_comment().
+    * In the `src/cli.cpp` file there are 4 functions that accept, validate and handle user input. Namely: get_selection_with_exit() at line 80, get_selection() at line 94, get_int() at line 107, and get_comment() at line 117.
 
 ### Object Oriented Progeamming
 1. The project uses Object Oriented Programming techniques.
-    * There are 3 classes in the project. `Order`, `Orders` and `Menu` that are respecively found in the `order.cpp`, `orders.cpp` and `menu.cpp`.
+    * There are 3 classes in the project. `class Order`, `class Orders` and `class Menu` that can respecively be found at the `order.cpp`, `orders.cpp` and `menu.cpp` source files.
 2. Classes use appropriate access specifiers for class members.
-    * In class `Menu`, there are public and private mebers.
+    * In `class Menu`, there are public and private mebers at lines 9 and 22 of the `menu.h` header file. 
 7. Overloaded functions allow the same function to operate on different parameters.
-    * In class `Order` there are two member functions named `remove` that are overloaded with different arguments. 
+    * In `class Order` there are two methods named `remove` that are overloaded with different arguments. Their declarations can be found at the `order.h` header file lines 22 and 23. Their definitions are at the `order.cpp` lines 58 and 65.
 
 ## Dependencies for running locally
 * cmake >= 3.11
