@@ -5,11 +5,23 @@
 #include "order.h"
 #include "orders.h"
 
-Orders::Orders() { coffeshop_id_ = 0; }
+Orders::Orders() noexcept { coffeshop_id_ = 0; }
 
-void Orders::add(Order order) { orders_.push_back(order); }
+/**
+ *  add
+ *
+ *  Adds a non empty order to the orders queue
+ */
+bool Orders::add(Order order) noexcept {
+  bool is_added = false;
+  if (order.empty() == false) {
+    orders_.push_back(order);
+    is_added = true;
+  }
+  return is_added;
+}
 
-void Orders::remove_next() {
+void Orders::remove_next() noexcept {
   if (size() > 0) {
     orders_.pop_front();
   } // End if
@@ -27,14 +39,14 @@ Order Orders::find(int order_id) {
       if (order_id == (*it).get_id()) {
         return *it;
       } // End inner if
-    }   // End for    
+    }   // End for
   } else {
-    throw std::runtime_error("+ Exception: The orders queue is empty.");  
+    throw std::runtime_error("+ Exception: The orders queue is empty.");
   } // End outer if
   throw std::runtime_error("+ Exception: Order does not exist.");
 }
 
-void Orders::remove(Order order) {
+void Orders::remove(Order order) noexcept {
   if (size() > 0) {
     for (auto it = orders_.begin(); it != orders_.end(); ++it) {
       if (order == *it) {
@@ -45,9 +57,9 @@ void Orders::remove(Order order) {
   }             // End outer if
 }
 
-int Orders::size() const { return orders_.size(); }
+int Orders::size() const noexcept { return orders_.size(); }
 
-void Orders::print_next() const {
+void Orders::print_next() const noexcept {
   if (size() > 0) {
     orders_.front().print();
   } else {
@@ -55,7 +67,7 @@ void Orders::print_next() const {
   } // End if
 }
 
-void Orders::print_all() const {
+void Orders::print_all() const noexcept {
   if (size() > 0) {
     std::cout << std::endl
               << ">>>" << std::endl

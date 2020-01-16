@@ -82,7 +82,7 @@ int cli::get_selection(int max) {
 
   while (selection <= 0 || selection > max) {
     validate_cin();
-    std::cout << "Invalid input!" << std::endl 
+    std::cout << "Invalid input!" << std::endl
               << "Please enter a selection between 1 and " << max << ": ";
     std::cin >> selection;
   } // End while
@@ -118,7 +118,12 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
       std::cin.ignore(256, '\n');
       std::cout << "Enter comment: ";
       getline(std::cin, comment);
-      order.add(product, comment, menu);
+      if (order.add(product, comment, menu) == false) {
+        std::cout << std::endl
+                  << ">>>" << std::endl
+                  << "-- Sorry, " << menu->key_from_num(product)
+                  << " is out of stock" << std::endl;
+      }
       order.print();
       break;
     }
@@ -139,8 +144,14 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
     case 5: { // Add order to the orders queue
       // When the order is added to the orders queue, we are closing this order
       // and return to the main menu.
-      orders->add(order);
-      selection = -1;
+      if (orders->add(order)) {
+        selection = -1;
+      } else {
+        std::cout << std::endl
+                  << ">>>" << std::endl
+                  << "++ Sorry, cannot add an empty order to the orders queue"
+                  << std::endl;
+      }
       break;
     }
     default: { // Need an escape route!!!
@@ -201,7 +212,7 @@ void cli::bartender_handler(Menu *menu, Orders *orders) {
 }
 
 void cli::live() {
-  Menu menu;
+  Menu menu("catalog.txt");
   Orders orders;
   int selection = 0;
 
@@ -224,6 +235,4 @@ void cli::live() {
  * Clears the screen for clarity of the menu system. Interesting approach!!!
  * found at: https://stackoverflow.com/questions/17335816/clear-screen-using-c
  */
-void cli::cls() {
-  std::cout << "\033[2J\033[1;1H";
-}
+void cli::cls() { std::cout << "\033[2J\033[1;1H"; }

@@ -23,27 +23,28 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 ├── CMakeLists.txt
 ├── README.md
 ├── data
-│   └── catalog.txt // The menu catalog in text format, can be set up by the manager
+│   ├── catalog.txt       // The menu catalog in text format, can be set up by the manager
+│   └── test_catalog.txt  // The menu catalog in text format, used for unit testing (do not change)
 ├── include
-│   ├── cli.h       // namespace cli
-│   ├── menu.h      // class Menu
-│   ├── order.h     // class Order
-│   ├── orders.h    // class Orders
-│   └── test.h      // namespace tst
+│   ├── cli.h             // namespace cli
+│   ├── menu.h            // class Menu
+│   ├── order.h           // class Order
+│   ├── orders.h          // class Orders
+│   └── test.h            // namespace tst
 └── src
-    ├── cli.cpp     // Command line interface implementation
-    ├── client.cpp  // Future provision
-    ├── main.cpp    // Command line options
-    ├── menu.cpp    // class Menu
-    ├── order.cpp   // class Order
-    ├── orders.cpp  // class Orders
-    ├── server.cpp  // Future provision
-    └── test.cpp    // Tests implementation
+    ├── cli.cpp           // Command line interface implementation
+    ├── client.cpp        // Future provision
+    ├── main.cpp          // Command line options
+    ├── menu.cpp          // class Menu
+    ├── order.cpp         // class Order
+    ├── orders.cpp        // class Orders
+    ├── server.cpp        // Future provision
+    └── test.cpp          // Tests implementation
 ```
 
 ## Implementation notes
 
-The menu catalog is provided through a text file that can be found at `/data/catalog.txt`. The file is parsed from the program to provide a starting point for daily coffee shop operations. The manager can edit this file as she sees fit as a preliminary act before launching the program.
+The menu catalog is provided through a text file that can be found at `/data/catalog.txt`. The file is parsed from the program to provide a starting point for daily coffee shop operations. The manager can edit this file as she sees fit as a preliminary act before launching the program. The file `/data/test_catalog.txt` is intended for unit testing it used by test.cpp and shall not be changed or it willl affect the test behavior.
 
 The backbone of the program is consisted of three classes, namely `class Menu`, `class Orders`, `class Order`. Lets have a look at them in more detail.
 

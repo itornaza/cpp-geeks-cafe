@@ -9,18 +9,18 @@
 class Orders {
 public:
   // Constructor
-  Orders();
+  Orders() noexcept;
 
   // Behavior
-  void add(Order);
-  Order find(int);  // throws runtime exception
-  void remove_next();
-  void remove(Order);
-  int size() const;
+  bool add(Order) noexcept;
+  Order find(int); // throws runtime exception
+  void remove_next() noexcept;
+  void remove(Order) noexcept;
+  int size() const noexcept;
 
   // Printing
-  void print_next() const;
-  void print_all() const;
+  void print_next() const noexcept;
+  void print_all() const noexcept;
 
 private:
   int coffeshop_id_;         // Provision for future versions

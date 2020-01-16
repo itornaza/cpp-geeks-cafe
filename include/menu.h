@@ -8,20 +8,20 @@
 class Menu {
 public:
   // Constructor
-  Menu();
+  Menu(std::string) noexcept;
 
   // Behavior
-  void manage_resource(std::string);
-  bool is_available(std::string) const;
-  std::string key_from_num(int);
-  int size() const;
+  void manage_resource(std::string) noexcept;
+  bool is_available(std::string) const noexcept;
+  std::string key_from_num(int) noexcept;
+  int size() const noexcept;
 
   // Printing
-  void print() const;
+  void print() const noexcept;
 
 private:
   // Helpers
-  std::string trim(std::string &, char);
+  std::string trim(std::string &, char) noexcept;
 
   std::map<std::string, int> catalog_; // Menu catalog with product quantities
   int unlimited_;  // Marks products that have unlimited quantities

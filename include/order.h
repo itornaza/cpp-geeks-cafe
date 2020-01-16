@@ -9,23 +9,24 @@
 class Order {
 public:
   // Constructor
-  Order(int, int);
+  Order(int, int) noexcept;
 
   // Getters and setters
-  void set_id(int);
-  int get_id() const;
-  int get_waiter_id() const;
-  int get_table_id() const;
+  void set_id(int) noexcept;
+  int get_id() const noexcept;
+  int get_waiter_id() const noexcept;
+  int get_table_id() const noexcept;
 
   // Behavior
-  void add(int, std::string, Menu *);
-  void remove(int);
-  void clear();
-  int size() const;
-  bool operator==(Order);
+  bool add(int, std::string, Menu *) noexcept;
+  void remove(int) noexcept;
+  void clear() noexcept;
+  int size() const noexcept;
+  bool empty() const noexcept;
+  bool operator==(Order) noexcept;
 
   // Printing
-  void print() const;
+  void print() const noexcept;
 
 private:
   int id_;
