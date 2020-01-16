@@ -6,10 +6,10 @@
 
 #include "menu.h"
 
-Menu::Menu() {
+Menu::Menu(std::string filename) noexcept {
   unlimited_ = -1;
 
-  std::string path = "../data/catalog.txt";
+  std::string path = "../data/" + filename;
   std::string delimeter = "*";
   std::ifstream fd;
   std::string key;
@@ -18,7 +18,8 @@ Menu::Menu() {
 
   fd.open(path);
   if (fd.fail()) {
-    std::cerr << "Error: Cannot open data/catalog.txt" << std::endl;
+    std::cerr << "Error: Cannot open " << path << ", "
+              << "please check the file exists." << std::endl;
     exit(1);
   }
 
@@ -60,10 +61,14 @@ Menu::Menu() {
   fd.close();
 }
 
-void Menu::manage_resource(std::string key) {
-
-  // TODO: Protect operation with a mutex to avoid race conditions
-  // TODO: Update catalog text file or not???
+/**
+ * manage_resource
+ *
+ * - Keeps track of a product that is offered in a limited quantity as set in
+ * the /data/catalog.txt
+ * - It does NOT update the quantity on the catalog text file
+ */
+void Menu::manage_resource(std::string key) noexcept {
   mtx_.lock();
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     if ((*it).first == key) {
@@ -75,10 +80,10 @@ void Menu::manage_resource(std::string key) {
   mtx_.unlock();
 }
 
-bool Menu::is_available(std::string key) const {
+bool Menu::is_available(std::string key) const noexcept {
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
     if ((*it).first == key) {
-      if ((*it).second != 0) {
+      if ((*it).second != 0) { // Remember, -1 is unlimited
         return true;
       } // End inner if
     }   // End outer if
@@ -86,7 +91,7 @@ bool Menu::is_available(std::string key) const {
   return false;
 }
 
-std::string Menu::key_from_num(int product) {
+std::string Menu::key_from_num(int product) noexcept {
   int i = 0;
   std::map<std::string, int>::iterator it;
   for (it = catalog_.begin(); it != catalog_.end(); ++it) {
@@ -99,13 +104,12 @@ std::string Menu::key_from_num(int product) {
   return (*it).first; // TODO: If a product is not found we return the last
 }
 
-int Menu::size() const { return catalog_.size(); }
+int Menu::size() const noexcept { return catalog_.size(); }
 
-void Menu::print() const {
+void Menu::print() const noexcept {
   std::cout << std::endl
             << "********************************************" << std::endl
-            << "*  Coffee shop menu (" << size() << ") products"
-            << std::endl
+            << "*  Geeks cafe menu (" << size() << ") products" << std::endl
             << "********************************************" << std::endl;
   int i = 1;
   for (auto it = catalog_.begin(); it != catalog_.end(); ++it) {
@@ -124,7 +128,7 @@ void Menu::print() const {
  *
  * A helper method to discard leading and trailing whitespace from string
  */
-std::string Menu::trim(std::string &str, char delim) {
+std::string Menu::trim(std::string &str, char delim) noexcept {
   size_t first = str.find_first_not_of(delim);
   size_t last = str.find_last_not_of(delim);
   return str.substr(first, (last - first + 1));
