@@ -86,7 +86,7 @@ void tst::test_orders(Menu *menu, Orders *orders) {
   assert(orders->size() == 2);
 
   // Test remove next
-  orders->remove_next();
+  orders->remove();
   assert(orders->size() == 1);
 
   // Test remove order does not crash on random number
@@ -97,11 +97,11 @@ void tst::test_orders(Menu *menu, Orders *orders) {
   }
 
   // Test orders are empty
-  orders->remove_next();
+  orders->remove();
   assert(orders->size() == 0);
 
   // Test cannot remove order from an empty queue
-  orders->remove_next();
+  orders->remove();
   assert(orders->size() == 0);
 
   std::cout << " [ok]" << std::endl;
