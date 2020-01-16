@@ -18,9 +18,6 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 
 ## Code structure
 
-* `/include` contains all the respective header files.
-* `/src` contains all the cpp files.
-
 ```
 .
 ├── CMakeLists.txt
