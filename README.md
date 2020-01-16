@@ -60,6 +60,22 @@ Following the same style, tests are implemented in `test.cpp` and can be launche
 
 ## Rubric points addressed
 
+### Loops, Funtions, I/O
+1. The project demonstrates an understanding of C++ functions and control structures.
+    * In the file `/src/cli.cpp`, the `waiter_handler()` function at lines TODO demonstrates if, while and switch control structures. In addition, this file organises functions under the namespace `cli`.
+2. The project reads data from a file and process the data, or the program writes data to a file.
+    * In the file `/src/menu.cpp`, the constructor of the `class Menu` at line TODO accepts a filename as an argument and uses it to access the file located at `/data/catalog.txt` to initialize the `catalog_` private member of the class.
+3. The project accepts user input and processes the input.
+    * In the `src/cli.cpp` file there are 4 functions that accept, validate and handle user input. Namely: validate_cin(), get_selection_with_exit() get_selection() and get_comment().
+
+### Object Oriented Progeamming
+1. The project uses Object Oriented Programming techniques.
+    * There are 3 classes in the project. `Order`, `Orders` and `Menu` that are respecively found in the `order.cpp`, `orders.cpp` and `menu.cpp`.
+2. Classes use appropriate access specifiers for class members.
+    * In class `Menu`, there are public and private mebers.
+7. Overloaded functions allow the same function to operate on different parameters.
+    * In class `Order` there are two member functions named `remove` that are overloaded with different arguments. 
+
 ## Dependencies for running locally
 * cmake >= 3.11
   * All OSes: [click here for installation instructions](https://cmake.org/install/)

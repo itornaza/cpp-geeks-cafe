@@ -21,7 +21,7 @@ bool Orders::add(Order order) noexcept {
   return is_added;
 }
 
-void Orders::remove_next() noexcept {
+void Orders::remove() noexcept {
   if (size() > 0) {
     orders_.pop_front();
   } // End if

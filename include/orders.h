@@ -14,7 +14,7 @@ public:
   // Behavior
   bool add(Order) noexcept;
   Order find(int); // throws runtime exception
-  void remove_next() noexcept;
+  void remove() noexcept;
   void remove(Order) noexcept;
   int size() const noexcept;
 

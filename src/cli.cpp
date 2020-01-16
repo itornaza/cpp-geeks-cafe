@@ -73,7 +73,6 @@ int cli::get_selection_with_exit(int max) {
               << "Please enter a selection between 1 and " << max << ": ";
     std::cin >> selection;
   } // End while
-  cls();
   return selection;
 }
 
@@ -88,7 +87,6 @@ int cli::get_selection(int max) {
               << "Please enter a selection between 1 and " << max << ": ";
     std::cin >> selection;
   } // End while
-  cls();
   return selection;
 }
 
@@ -105,7 +103,8 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
   int selection = 0;
   int waiter = 0;
   int table = 0;
-
+  
+  cls();
   std::cout << std::endl
             << "--------------" << std::endl
             << "Waiter details" << std::endl
@@ -114,21 +113,22 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
   waiter = get_selection(3);
   std::cout << "Table number > ";
   table = get_selection(20);
+  cls();
 
   Order order(waiter, table);
 
   while (selection != -1) {
     waiter_menu();
-    selection = get_selection_with_exit(5);
-
+    selection = get_selection_with_exit(6);
+    cls();
     switch (selection) {
-    case 1: { // Add product from the order
+    case 1: { // Add product to order
       menu->print();
       int product = get_selection(menu->size());
       std::string comment = get_comment();
+      cls();
       if (order.add(product, comment, menu) == false) {
-        std::cout << std::endl
-                  << ">>>" << std::endl
+        std::cout << std::endl << ">>>" << std::endl
                   << "-- Sorry, " << menu->key_from_num(product)
                   << " is out of stock" << std::endl;
       }
@@ -137,15 +137,21 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
     }
     case 2: { // Remove products from the order that have the same key
       order.print();
-      int product = get_selection(menu->size());
-      order.remove(product);
+      if (order.empty() == false) {
+        int product = get_selection(menu->size());
+        cls();
+        order.remove(product);
+      }
       break;
     }
     case 3: { // Remove product from the order by key and comment
       order.print();
-      int product = get_selection(menu->size());
-      std::string comment = get_comment();
-      order.remove(product, comment);
+      if (order.empty() == false) {
+        int product = get_selection(menu->size());
+        std::string comment = get_comment();
+        cls();
+        order.remove(product, comment);
+      }
       break;
     }
     case 4: { // Clear all products from the order
@@ -162,8 +168,7 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
       if (orders->add(order)) {
         selection = -1;
       } else {
-        std::cout << std::endl
-                  << ">>>" << std::endl
+        std::cout << std::endl << ">>>" << std::endl
                   << "++ Sorry, cannot add an empty order to the orders queue"
                   << std::endl;
       }
@@ -179,15 +184,17 @@ void cli::waiter_handler(Menu *menu, Orders *orders) {
 
 void cli::bartender_handler(Menu *menu, Orders *orders) {
   int selection = 0;
+  cls();
 
   while (selection != -1) {
     bartender_menu();
     selection = get_selection_with_exit(4);
+    cls();
 
     switch (selection) {
     case 1: { // Remove next order from the orders queue
       if (orders->size() > 0) {
-        orders->remove_next();
+        orders->remove();
       } else {
         std::cout << std::endl << "+ All orders are processed." << std::endl;
       } // End if
