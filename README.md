@@ -46,11 +46,11 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 
 ## Implementation notes
 
-![class schematic](images/cpp-geeks-cafe.png)
-
 The menu catalog is provided through a text file that can be found at `/data/catalog.txt`. The file is parsed from the program to provide a starting point for daily coffee shop operations. The manager can edit this file as she sees fit as a preliminary act before launching the program. The file `/data/test_catalog.txt` is intended for unit testing it used by test.cpp and shall not be changed or it willl affect the test behavior.
 
 The backbone of the program is consisted of three classes, namely `class Menu`, `class Orders`, `class Order`. Lets have a look at them in more detail.
+
+<p align="center"><img src="images/cpp-geeks-cafe.png"/></p>
 
 * `Menu` handles the initialization of the menu catalog from the `/datacatalog.txt` file. It also provides a simple resource management system to keep track of products that are limited in number at the coffee shop inventory. For example there might be only 5 Creme brulees and the FIFO concept must be stricktly applied. The rest is basic functionality to print and access menu items.
 
