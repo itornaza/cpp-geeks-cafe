@@ -11,9 +11,9 @@ int main(int argc, char *argv[]) {
       tst::test();
     } else if (s == "-h") {
       cli::usage();
-    }
+    } // End inner if
   } else {
-    cli::live();
-  }
+    cli::handler();
+  } // End outer if
   return 0;
 }

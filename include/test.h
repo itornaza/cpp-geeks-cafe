@@ -5,7 +5,10 @@
 #include "orders.h"
 
 namespace tst {
+// Test suite
 void test();
+
+// Test cases
 void test_order(Menu *, Orders *);
 void test_orders(Menu *, Orders *);
 void test_menu(Menu *, Orders *);

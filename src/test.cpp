@@ -9,11 +9,17 @@
 
 void tst::test() {
   std::cout << std::endl << "* Geeks cafe tests" << std::endl;
+  
+  // Set up the objects
   Menu menu("test_catalog.txt");
   Orders orders;
+
+  // Run the test cases
   test_order(&menu, &orders);
   test_orders(&menu, &orders);
   test_menu(&menu, &orders);
+
+  std::cout << "* All tests passed!" << std::endl << std::endl;
 }
 
 void tst::test_order(Menu *menu, Orders *orders) {
@@ -94,7 +100,7 @@ void tst::test_orders(Menu *menu, Orders *orders) {
     Order order = orders->find(23551111);
   } catch (const std::exception &e) {
     std::cout << "(" << e.what() << ")";
-  }
+  } // End try/catch
 
   // Test orders are empty
   orders->remove();
@@ -119,11 +125,11 @@ void tst::test_menu(Menu *menu, Orders *orders) {
   for (int i = 2; i > 0; --i) {
     assert(menu->is_available(key) == true);
     order_1.add(2, "with an extra spoon", menu);
-  }
+  } // End for
 
   // Try to get one more
   assert(menu->is_available(key) == false);
   assert(order_1.add(2, "with an extra spoon", menu) == false);
 
-  std::cout << " [ok]" << std::endl << std::endl;
+  std::cout << " [ok]" << std::endl;
 }
