@@ -1,4 +1,4 @@
-# Geeks Cafe - Cpp Nanodegree Capstone Project
+# Geeks Cafe
 
 This project implements a basic coffe shop ordering system where waiters put orders and bartenders handle them in a 'first in first out - FIFO' manner for our geeks, or 'first come first served' for the non-geek customers. Access to this basic functionality is provided through a command line interface to keep dependencies to a bare minimum and provide a base for future gui implementations. Nonetheless, this project highlights above all things the need for coffee as an indespensable companion to writing code.
 
