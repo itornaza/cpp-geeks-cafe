@@ -24,6 +24,7 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 * `/include` contains all the respective header files.
 * `/src` contains all the cpp files.
 
+```
 CMakeLists.txt   
 README.md   
 data   
@@ -43,6 +44,7 @@ src
     orders.cpp   
     server.cpp   
     test.cpp   
+```
 
 ## Implementation notes
 
