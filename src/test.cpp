@@ -26,6 +26,10 @@ void tst::test_order(Menu *menu, Orders *orders) {
   Order order_2(1, 12);
   assert(order_1.get_id() != order_2.get_id());
 
+  // Test waiter and table numbers
+  assert(order_1.get_waiter_id() == 1);
+  assert(order_1.get_table_id() == 10);
+
   // Test that the orders are empty
   assert(order_1.empty() == true);
   assert(order_2.empty() == true);
@@ -36,17 +40,27 @@ void tst::test_order(Menu *menu, Orders *orders) {
   order_1.add(4, "with little sugar", menu);
   order_1.add(3, "one brown suggar", menu);
   order_1.add(1, "flat", menu);
+  
   order_2.add(1, "flat", menu);
+
+  // Test order size
+  assert(order_1.size() == 5);
+
+  // Test remove order that has multiple occurencies of the same key
+  order_1.remove(4, "no sugar");
+  assert(order_1.size() == 4);
 
   // Test that the orders are not empty
   assert(order_1.empty() == false);
   assert(order_2.empty() == false);
 
-  // Test remove
+  // Test remove by key
   order_2.remove(1);
   assert(order_2.empty() == true);
-
-  order_2.add(1, "flat", menu);
+  
+  // Test clear
+  order_1.clear();
+  assert(order_2.empty() == true);
 
   std::cout << " [ok]" << std::endl;
 }

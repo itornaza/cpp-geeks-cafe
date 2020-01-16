@@ -5,9 +5,10 @@
 #include "menu.h"
 #include "order.h"
 
-Order::Order(int waiter_id, int table_id) noexcept
-    : waiter_id_(waiter_id), table_id_(table_id) {
-  Order::set_id(waiter_id);
+Order::Order(int waiter_id, int table_id) noexcept {
+  set_id(waiter_id);
+  waiter_id_ = waiter_id;
+  table_id_ = table_id;
 }
 
 int Order::get_id() const noexcept { return id_; }
@@ -49,12 +50,37 @@ bool Order::add(int product, std::string comment, Menu *menu) noexcept {
   return is_added;
 }
 
+/**
+ * remove(int)
+ * 
+ * Erases all products with this key
+ */
 void Order::remove(int product) noexcept {
-  products_.erase(product); // TODO: Erases all products with this key
+   products_.erase(product); 
+}
+
+/**
+ * remove(int, string)
+ * 
+ * Erases the product with the same comment
+ */
+void Order::remove(int product, std::string comment) noexcept {
+  auto range = products_.equal_range(product);
+  for (auto& q = range.first; q != range.second; ++q) {
+    if (q->second == comment) {
+      products_.erase(q);
+      break;
+    }
+  }
 }
 
 void Order::clear() noexcept { products_.clear(); }
 
+/**
+ * count
+ * 
+ * Returns the total number of products inside an order
+ */
 int Order::size() const noexcept { return products_.size(); }
 
 bool Order::empty() const noexcept { return products_.empty(); }
@@ -63,14 +89,16 @@ void Order::print() const noexcept {
   std::cout << std::endl
             << ">>>" << std::endl
             << "- Order " << id_ << " from waiter " << waiter_id_
-            << " at table " << table_id_ << std::endl;
+            << " at table " << table_id_ 
+            << " (contains " << size() << " products)" << std::endl;
 
   if (!empty()) {
     for (auto it = products_.begin(); it != products_.end(); ++it) {
       std::cout << "-- " << (*it).first << " - " << (*it).second << std::endl;
     }
   } else {
-    std::cout << "-- The order is still empty" << std::endl;
+    std::cout << "-- The order is still empty." << std::endl 
+              << "-- You may want to ask the customers for their orders!" << std::endl;
   }
 }
 
