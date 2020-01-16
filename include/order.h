@@ -20,6 +20,7 @@ public:
   // Behavior
   bool add(int, std::string, Menu *) noexcept;
   void remove(int) noexcept;
+  void remove(int, std::string) noexcept;
   void clear() noexcept;
   int size() const noexcept;
   bool empty() const noexcept;
@@ -30,8 +31,8 @@ public:
 
 private:
   int id_;
-  int table_id_;
   int waiter_id_;
+  int table_id_;
   std::multimap<int, std::string> products_; // Product catalog num and comment
 };
 
