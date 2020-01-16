@@ -52,33 +52,31 @@ bool Order::add(int product, std::string comment, Menu *menu) noexcept {
 
 /**
  * remove(int)
- * 
+ *
  * Erases all products with this key
  */
-void Order::remove(int product) noexcept {
-   products_.erase(product); 
-}
+void Order::remove(int product) noexcept { products_.erase(product); }
 
 /**
  * remove(int, string)
- * 
+ *
  * Erases the product with the same comment
  */
 void Order::remove(int product, std::string comment) noexcept {
   auto range = products_.equal_range(product);
-  for (auto& q = range.first; q != range.second; ++q) {
+  for (auto &q = range.first; q != range.second; ++q) {
     if (q->second == comment) {
       products_.erase(q);
       break;
     } // End if
-  } // End for
+  }   // End for
 }
 
 void Order::clear() noexcept { products_.clear(); }
 
 /**
  * count
- * 
+ *
  * Returns the total number of products inside an order
  */
 int Order::size() const noexcept { return products_.size(); }
@@ -86,24 +84,26 @@ int Order::size() const noexcept { return products_.size(); }
 bool Order::empty() const noexcept { return products_.empty(); }
 
 void Order::print() const noexcept {
-  std::cout << std::endl << ">>>" << std::endl
-    << "- Order " << id_ << " from waiter " << waiter_id_
-    << " at table " << table_id_ << " (contains " << size() << " products)" 
-    << std::endl;
+  std::cout << std::endl
+            << ">>>" << std::endl
+            << "- Order " << id_ << " from waiter " << waiter_id_
+            << " at table " << table_id_ << " (contains " << size()
+            << " products)" << std::endl;
 
   if (!empty()) {
     for (auto it = products_.begin(); it != products_.end(); ++it) {
       std::cout << "-- " << (*it).first << " - " << (*it).second << std::endl;
     } // End for
   } else {
-    std::cout << "-- The order is still empty." << std::endl 
-      << "-- You may want to ask the customers for their orders!" << std::endl;
+    std::cout << "-- The order is still empty." << std::endl
+              << "-- You may want to ask the customers for their orders!"
+              << std::endl;
   } // End if
 }
 
 /**
  * ==
- * 
+ *
  * Consider the orders equal if they have the same id
  */
 bool Order::operator==(Order order) noexcept { return (id_ == order.id_); }

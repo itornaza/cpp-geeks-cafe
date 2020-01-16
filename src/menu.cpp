@@ -18,8 +18,8 @@ Menu::Menu(std::string filename) noexcept {
 
   fd.open(path);
   if (fd.fail()) {
-    std::cerr << "Error: Cannot open " << path 
-      << ", please check the file exists." << std::endl;
+    std::cerr << "Error: Cannot open " << path
+              << ", please check the file exists." << std::endl;
     exit(1);
   }
 
@@ -34,7 +34,7 @@ Menu::Menu(std::string filename) noexcept {
     while (!stream.eof()) {
       stream >> tmp;
 
-      // Exract the key 
+      // Exract the key
       if (tmp != delimeter) {
         key.append(" ");
         key.append(tmp);
@@ -49,7 +49,7 @@ Menu::Menu(std::string filename) noexcept {
         stream >> tmp;
         value = std::atoi(tmp.c_str());
       } // End if
-    } // End inner while
+    }   // End inner while
 
     // Assign the key and value to the menu catalog
     key = Menu::trim(key, ' ');
@@ -64,8 +64,8 @@ Menu::Menu(std::string filename) noexcept {
  * - Keeps track of a product that is offered in a limited quantity as set in
  *   the text file
  * - It does NOT update the quantity on the catalog text file
- * - It is an atomic operation to avoid data races in a networked environment as a
- *   provision for future versions
+ * - It is an atomic operation to avoid data races in a networked environment as
+ * a provision for future versions
  */
 void Menu::manage_resource(std::string key) noexcept {
   mtx_.lock();
@@ -99,7 +99,7 @@ std::string Menu::key_from_num(int product) noexcept {
       break;
     } // End if
     ++i;
-  } // End for
+  }                   // End for
   return (*it).first; // TODO: If a product is not found we return the last
 }
 
