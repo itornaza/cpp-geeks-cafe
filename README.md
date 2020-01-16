@@ -1,12 +1,22 @@
-# Coffee shop ordering system
+# Geek's Coffee Shop - Cpp Nanodegree Capstone Project
 
-This project implements a basic coffe shop ordering system where waiters put orders and bartenders handle them in a first in first out (FIFO) manner. Access to this basic functionality is provided through a command line interface to keep dependencies to a bare minimum and provide a base for future gui implementations.
+This project implements a basic coffe shop ordering system where waiters put orders and bartenders handle them in a first in first out (FIFO) manner. Access to this basic functionality is provided through a command line interface to keep dependencies to a bare minimum and provide a base for future gui implementations. Nonetheless, this project highlights above all things the need for coffee as an indespensable companion to writing code.
 
-It is the capstone, or just the last project, out of a series of 5 projects that are required for the completion of the C++ Nanodegree from Udacity. Nonetheless, this project highlights above all things the need for coffee as a indespensable companion to writing code.
+It is the capstone, or just the last project out of a series of 5 projects that are required for the completion of the C++ Nanodegree from Udacity. It implements 'Capstone Option 1: build the project of your choice' and is compared against this [rubric](https://review.udacity.com/#!/rubrics/2533/view).
 
-Future versions shall include a client/server architecture, ios implementation for the client part, and a desktop gui for the server.
+Future versions may include client/server architecture with support of multiple clients, ios implementation for the client part, and a desktop gui for the server.
 
-## Directiry structure
+## Expected behavior
+
+The program guides the user through a series of command line menus. Initially it presents the option for selecting between different roles within the coffee shop, i.e. waiter or bartender. The user can have any role without access control being enforced.
+
+If a waiter is selected, a number for the table and another one for the waiter has to be provided by the user. Then a menu of waiter options is presented so the waiter can add, remove or clear all products from the current order. She can also print an order and finally add the order to the queue for handling by the bartender. There is no provision for editing an order after it is pushed to the queue. Orders are supposed to be kind of short and they can just be deleted and filled up again.
+
+If the bartender role is selected, the user can use various printing modes to be able to process the orders. She can also remove orders as they are being ready, or delete any order in case the customer changed her mind. However, the orders arrive and are presented in a FIFO manner so all customers are happy!
+
+Keep in mind that order numbers are in XYYYYY format, where X is the waiter number and YYYYY is the second of the current day ranging from 1 to 86400. This satisfies both the uniqueness of the order as well as a secondary means to distinguish between orders precedence.
+
+## Code structure
 
 `/data` contains the catalog in text format
 `/include` contains all the respective header files.
@@ -24,11 +34,13 @@ The backbone of the program is consisted of three classes, namely `class Menu`, 
 
 * `Order` is the class that handles the individual orders to support our waiters. We need a unique id for each order and we create it by combining the waiter's id with the second of the day that the order is taken. Within the order we find a multimap object that keeps track of the product that was ordered associated with an optional comment from the customer, like "one brown sugar and no cream". Of course basic functionality to add remove and clear products from our order is included as well.
 
-The command line interface is implemented in a separate file named `cli.cpp` so it can be easily replaced by a more advanced gui. The respective functions are packed together in `namespace cli` for code clarity.
+The command line interface is implemented in a separate file named `cli.cpp` so it can be easily replaced by a more sophisticated gui. The respective functions are packed together in `namespace cli` for code clarity.
 
-There are some tests implemented in `test.cpp` which can be launched with the `-t` option.
+Following the same style, tests are implemented in `test.cpp` and can be launched with the `-t` option, as described below in the 'Basic build instructions' section.
 
-## Dependencies for Running Locally
+## Rubric points addressed
+
+## Dependencies for running locally
 * cmake >= 3.11
   * All OSes: [click here for installation instructions](https://cmake.org/install/)
 * make >= 4.1 (Linux, Mac), 3.81 (Windows)
@@ -40,7 +52,7 @@ There are some tests implemented in `test.cpp` which can be launched with the `-
   * Mac: same deal as make - [install Xcode command line tools](https://developer.apple.com/xcode/features/)
   * Windows: recommend using [MinGW](http://www.mingw.org/)
 
-## Basic Build Instructions
+## Basic build instructions
 
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
