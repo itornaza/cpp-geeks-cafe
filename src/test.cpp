@@ -9,7 +9,7 @@
 
 void tst::test() {
   std::cout << std::endl << "* Geeks cafe tests" << std::endl;
-  
+
   // Set up the objects
   Menu menu("test_catalog.txt");
   Orders orders;
@@ -46,7 +46,7 @@ void tst::test_order(Menu *menu, Orders *orders) {
   order_1.add(4, "with little sugar", menu);
   order_1.add(3, "one brown suggar", menu);
   order_1.add(1, "flat", menu);
-  
+
   order_2.add(1, "flat", menu);
 
   // Test order size
@@ -63,7 +63,7 @@ void tst::test_order(Menu *menu, Orders *orders) {
   // Test remove by key
   order_2.remove(1);
   assert(order_2.empty() == true);
-  
+
   // Test clear
   order_1.clear();
   assert(order_2.empty() == true);

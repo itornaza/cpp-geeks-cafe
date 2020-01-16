@@ -63,22 +63,25 @@ void Orders::print_next() const noexcept {
   if (size() > 0) {
     orders_.front().print();
   } else {
-    std::cout << std::endl << ">>>" << std::endl
-      << "+ All orders are processed! Keep up the good work!" 
-      << std::endl;
+    std::cout << std::endl
+              << ">>>" << std::endl
+              << "+ All orders are processed! Keep up the good work!"
+              << std::endl;
   } // End if
 }
 
 void Orders::print_all() const noexcept {
   if (size() > 0) {
-    std::cout << std::endl << ">>>" << std::endl
-      << "+ Pending orders: " << size() << std::endl;
+    std::cout << std::endl
+              << ">>>" << std::endl
+              << "+ Pending orders: " << size() << std::endl;
     for (auto it = orders_.begin(); it != orders_.end(); ++it) {
       (*it).print();
     } // End for
   } else {
-    std::cout << std::endl << ">>>" << std::endl
-      << "+ All orders are processed! Good job, ask for a raise!" 
-      << std::endl;
+    std::cout << std::endl
+              << ">>>" << std::endl
+              << "+ All orders are processed! Good job, ask for a raise!"
+              << std::endl;
   } // End if
 }
