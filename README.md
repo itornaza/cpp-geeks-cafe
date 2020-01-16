@@ -1,6 +1,6 @@
-# Geek's Coffee Shop - Cpp Nanodegree Capstone Project
+# Geeks Cafe - Cpp Nanodegree Capstone Project
 
-This project implements a basic coffe shop ordering system where waiters put orders and bartenders handle them in a first in first out (FIFO) manner. Access to this basic functionality is provided through a command line interface to keep dependencies to a bare minimum and provide a base for future gui implementations. Nonetheless, this project highlights above all things the need for coffee as an indespensable companion to writing code.
+This project implements a basic coffe shop ordering system where waiters put orders and bartenders handle them in a 'first in first out - FIFO' manner for our geeks, or 'first come first served' for the non-geek customers. Access to this basic functionality is provided through a command line interface to keep dependencies to a bare minimum and provide a base for future gui implementations. Nonetheless, this project highlights above all things the need for coffee as an indespensable companion to writing code.
 
 It is the capstone, or just the last project out of a series of 5 projects that are required for the completion of the C++ Nanodegree from Udacity. It implements 'Capstone Option 1: build the project of your choice' and is compared against this [rubric](https://review.udacity.com/#!/rubrics/2533/view).
 
@@ -18,9 +18,32 @@ Keep in mind that order numbers are in XYYYYY format, where X is the waiter numb
 
 ## Code structure
 
-`/data` contains the catalog in text format
-`/include` contains all the respective header files.
-`/src` contains all the cpp files.
+* `CMakeFileLists.txt`
+* `README.md`
+* `/data` contains the catalog in text format
+* `/include` contains all the respective header files.
+* `/src` contains all the cpp files.
+
+.
+├── CMakeLists.txt   
+├── README.md   
+├── data   
+│   └── catalog.txt   
+├── include   
+│   ├── cli.h   
+│   ├── menu.h   
+│   ├── order.h   
+│   ├── orders.h   
+│   └── test.h   
+└── src   
+    ├── cli.cpp   
+    ├── client.cpp   
+    ├── main.cpp   
+    ├── menu.cpp   
+    ├── order.cpp   
+    ├── orders.cpp   
+    ├── server.cpp   
+    └── test.cpp   
 
 ## Implementation notes
 
@@ -57,6 +80,6 @@ Following the same style, tests are implemented in `test.cpp` and can be launche
 1. Clone this repo.
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./coffee`
-5. Usage: `./coffee -h`
-6. Tests: `./coffee -t`
+4. Run it: `./cafe`
+5. Usage: `./cafe -h`
+6. Tests: `./cafe -t`
