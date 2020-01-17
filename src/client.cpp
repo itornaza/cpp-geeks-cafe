@@ -8,7 +8,10 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include "cli.h"
+#include "menu.h"
 #include "order.h"
+#include "orders.h"
 
 int main(int argc, char *argv[]) {
   int fd; // Socket file descriptor
@@ -58,11 +61,11 @@ int main(int argc, char *argv[]) {
   server.sin_port = htons(port);
 
   // Display server details
-  std::cout << "server address: " << (host->h_addr_list[0][0] & 0xff) << "."
+  std::cout << "Connecting to server at IP: " << (host->h_addr_list[0][0] & 0xff) << "."
             << (host->h_addr_list[0][1] & 0xff) << "."
             << (host->h_addr_list[0][2] & 0xff) << "."
             << (host->h_addr_list[0][3] & 0xff)
-            << ", port: " << static_cast<int>(port) << std::endl;
+            << ", port: " << static_cast<int>(port) << "... ";
 
   // Write resolved IP address of a server to the address structure
   memmove(&(server.sin_addr.s_addr), host->h_addr_list[0], 4);
@@ -72,18 +75,35 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  //-------------------
-  // Handle comms
-  //-------------------
+  //---------------------
+  // Handshake messages
+  //---------------------
 
-  std::cout << "Connected. Reading a server message" << std::endl;
+  // Receive handshake message
+  std::cout << "Connected!" << std::endl;
   if ((read(fd, buffer, 1024)) < 0) {
-    std::cerr << "Error: " << strerror(errno) << std::endl;
+    std::cerr << "Failed! " << strerror(errno) << std::endl;
     exit(1);
   }
-  std::cout << "Received: " << buffer << std::endl;
+  std::cout << "RX: " << buffer << std::endl;
 
-  write(fd, "Thanks! Bye-bye...\r\n", 20);
+  // Send handshake response
+  write(fd, "Thank you for having me at the 'Geeks Cafe'\r\n", 64);
+  
+  //-------------------
+  // Geeks Cafe
+  //-------------------
+
+  // 1. Receive the available quantities on limited resources from the server
+
+  // 2. Create an order
+
+  // 3. Send an order to the server
+
+  //-------------------
+  // Close connection
+  //-------------------
+  
   close(fd);
 
   return 0;
