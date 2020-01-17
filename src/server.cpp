@@ -6,6 +6,11 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include "cli.h"
+#include "menu.h"
+#include "order.h"
+#include "orders.h"
+
 int main(int argc, char *argv[]) {
   int port = 1234;
   int fd;            // Server socket file descriptor
@@ -62,7 +67,7 @@ int main(int argc, char *argv[]) {
   }
 
   //-------------------
-  // Handle connection
+  // Open connection
   //-------------------
 
   // Accept a connection with no timeout limit
@@ -72,7 +77,7 @@ int main(int argc, char *argv[]) {
   }
 
   // Display client connection details
-  std::cout << "Connection from IP: "
+  std::cout << "Connected with client at IP: "
             << ((ntohl(peeraddr.sin_addr.s_addr) >> 24) & 0xff)
             << "." // High byte of address
             << ((ntohl(peeraddr.sin_addr.s_addr) >> 16) & 0xff) << "."
@@ -81,18 +86,34 @@ int main(int argc, char *argv[]) {
             << ", port: " // Low byte of addr
             << ntohs(peeraddr.sin_port) << std::endl;
 
-  //-------------------
-  // Handle comms
-  //-------------------
+  //---------------------
+  // Handshake messages
+  //---------------------
 
-  write(clfd, "Hello!\r\n", 8);
+  // Send handshake message
+  write(clfd, "Welcome to the 'Geeks Cafe'!\r\n", 32);
 
+  // Receive handshake response
   if ((rx_bytes = read(clfd, buffer, 1023)) < 0) {
     std::cerr << "Error: " << strerror(errno) << std::endl;
     exit(1);
   }
   buffer[rx_bytes] = 0;
-  std::cout << "Received " << rx_bytes << " bytes:" << std::endl << buffer;
+  std::cout << "RX (" << rx_bytes << " Bytes): " << buffer;
+
+  //-------------------
+  // Geeks Cafe
+  //-------------------
+
+  // 1. Send the available quantities on limited resources to the client, HOW???
+
+  // 2. Receive an order from the client
+
+  // 3. Add the order to th orders_ queue for processing
+
+  //-------------------
+  // Close connection
+  //-------------------
 
   close(clfd);
   close(fd);

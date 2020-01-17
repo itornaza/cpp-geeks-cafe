@@ -9,9 +9,12 @@ project(geeks-cafe)
 
 include_directories(include)
 
-add_executable(cafe src/orders.cpp src/order.cpp src/menu.cpp 
-                    src/cli.cpp src/test.cpp src/main.cpp)
+add_executable(cafe src/orders.cpp src/order.cpp src/menu.cpp src/cli.cpp 
+                    src/test.cpp src/main.cpp)
 
 # Uncomment for UNIX network development after udacity review
-# add_executable(server src/server.cpp)
-# add_executable(client src/client.cpp)
+add_executable(server src/server.cpp src/orders.cpp src/order.cpp src/menu.cpp
+                      src/cli.cpp)
+
+add_executable(client src/client.cpp src/orders.cpp src/order.cpp src/menu.cpp 
+                      src/cli.cpp)
