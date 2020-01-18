@@ -9,6 +9,7 @@
 #include <unistd.h>
 
 #include "cli.h"
+#include "client.h"
 #include "menu.h"
 #include "order.h"
 #include "orders.h"
@@ -93,6 +94,9 @@ int main(int argc, char *argv[]) {
   //-------------------
   // Geeks Cafe
   //-------------------
+
+  // The client shall implement the cli::waiter_handler function without 
+  // intefacing with the Orders
 
   // 1. Receive the available quantities on limited resources from the server
 
