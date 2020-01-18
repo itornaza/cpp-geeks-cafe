@@ -10,6 +10,7 @@
 #include "menu.h"
 #include "order.h"
 #include "orders.h"
+#include "server.h"
 
 int main(int argc, char *argv[]) {
   int port = 1234;
@@ -104,6 +105,10 @@ int main(int argc, char *argv[]) {
   //-------------------
   // Geeks Cafe
   //-------------------
+
+  // The server shall implement all the functions in the cli namespace to 
+  // process orders arriving from witers and orders taken from customers at the 
+  // bar
 
   // 1. Send the available quantities on limited resources to the client, HOW???
 
